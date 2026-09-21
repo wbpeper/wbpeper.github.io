@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Four-Bar Linkage | William Peper</title>
+  <meta name="description" content="ME 350 engineering case study: design, simulation, torque analysis, and closed-loop control of a four-bar LED positioning linkage." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" /><link rel="stylesheet" href="../style.css" />
+</head>
+<body>
+<header class="site-header"><div class="container nav"><a class="brand" href="../index.html">William Peper</a><nav><a href="../index.html#projects">Projects</a><a href="../index.html#experience">Experience</a><a href="../index.html#contact">Contact</a></nav></div></header>
+<main>
+<section class="case-hero"><div class="container"><p class="eyebrow">ME 350 · Plants vs. Zombies</p><h1>Four-Bar LED Positioning Linkage</h1><p class="lead">A single-motor four-bar mechanism designed, simulated, and controlled to position an LED at four target locations under geometric, mechanical, electrical, and packaging constraints.</p><div class="case-actions"><a class="button primary" href="../ME350%20FA25%20FINAL%20REPORT.pdf">Read the full final report</a><a class="button secondary" href="../index.html#projects">Back to projects</a></div></div></section>
+<section class="section"><div class="container case-layout"><article>
+<div class="section-heading"><p class="eyebrow">01 · Problem &amp; requirements</p><h2>From four target positions to one controlled mechanism</h2></div>
+<p>The objective was to develop a single-motor linkage capable of positioning an LED at four required target locations. The mechanism had to fit the available package, remain manufacturable, move with low inertia, and achieve repeatable positioning while keeping total predicted power below 1 W.</p>
+<table class="spec-table"><tr><th>Requirement</th><th>Design implication</th></tr><tr><td>Four target positions</td><td>Linkage workspace had to cover each required location.</td></tr><tr><td>Single-motor actuation</td><td>Geometry had to produce the required motion without independent axes.</td></tr><tr><td>30° ≤ μ ≤ 150°</td><td>Transmission angle had to remain within the allowable range.</td></tr><tr><td>Power &lt; 1 W</td><td>Moving mass, inertia, gearing, and control effort mattered together.</td></tr><tr><td>Repeatable positioning</td><td>Closed-loop sensing and feedback were required.</td></tr></table>
+
+<div class="section-heading"><p class="eyebrow">02 · Linkage fundamentals</p><h2>Optimizing force transmission—not just reaching the targets</h2></div>
+<p>Transmission angle describes how effectively force is transferred between links in a four-bar mechanism. Configurations near unfavorable transmission angles can reduce mechanical advantage and make it harder for the motor to drive the mechanism reliably.</p>
+<p>The design therefore did more than remain inside the allowable range of <strong>30° ≤ μ ≤ 150°</strong>. It sought to minimize the maximum deviation from 90° so force transmission remained more favorable across the operating range.</p>
+<div class="result-callout"><strong>Final maximum transmission-angle deviation: approximately 33.6°</strong><span>Geometry was evaluated against both workspace requirements and force-transmission quality.</span></div>
+<p>Moving mass was a competing objective. Reducing mass lowers rotational inertia, which reduces the torque required for acceleration and supports lower power consumption. Mass minimization alone was not sufficient: the linkage still needed acceptable transmission angles, stiffness, workspace, manufacturability, and reliable physical operation.</p>
+
+<div class="section-heading"><p class="eyebrow">03 · CAD &amp; kinematics</p><h2>Using geometry to prove the mechanism could reach every position</h2></div>
+<p>CAD configurations were used to evaluate the mechanism across its required positions. The four-bar layout demonstrated geometric feasibility and showed the coupler/LED path through the target workspace before committing to the physical design.</p>
+<div class="figure-placeholder"><strong>Figures 3.1.a–3.1.d</strong><span>Recommended visual block: place the four CAD configurations here as a grid so the full range of motion and target reach are immediately visible.</span></div>
+
+<div class="section-heading"><p class="eyebrow">04 · Dynamic simulation</p><h2>MSC ADAMS informed design selection</h2></div>
+<p>MSC ADAMS moved the evaluation beyond static CAD geometry. Candidate linkage designs were compared using their actual motion, input behavior, torque requirements, dynamic response, power consumption, and the effects of geometry and inertia.</p>
+<p>This made simulation part of design selection rather than merely a final validation step. The piecewise input motion also matters when interpreting the plots: changes in the commanded input can produce discontinuities in plotted torque, so the result must be read in the context of the prescribed motion rather than treated as unexplained physical behavior.</p>
+<div class="result-callout"><strong>Final simulated maximum power: approximately 0.92 W</strong><span>This remained below the 1 W system requirement and connected the geometry/inertia decisions to a measurable electrical constraint.</span></div>
+<div class="figure-placeholder"><strong>Figures 3.6.a–3.6.d</strong><span>Recommended visual block: include the ADAMS motion, torque, and power figures with short captions explaining what each plot changed in the design decision.</span></div>
+
+<div class="section-heading"><p class="eyebrow">05 · Selection &amp; torque transfer</p><h2>Balancing geometry, inertia, and mechanical integrity</h2></div>
+<p>Final selection considered transmission angles, moving mass, motor/load inertia, workspace, and manufacturability together. Inertia matching was used in selecting the drivetrain transmission, with a final <strong>1.6 gear transmission ratio</strong> where supported by the report.</p>
+<p>The final torque-transfer analysis checked the mechanical interfaces rather than relying only on nominal component availability. The input-link gear joint carried approximately <strong>11.9 lb·in</strong> of torque, and the steel spring pin was checked in shear to verify that the selected interface could safely transmit the expected load.</p>
+
+<div class="section-heading"><p class="eyebrow">06 · Controls integration</p><h2>Closing the loop around the mechanism</h2></div>
+<p>An Arduino-based controller used Hall encoder feedback, PWM motor control, a proximity sensor, and homing behavior through a limit switch. The controller compared desired and actual position and adjusted the motor rather than relying on open-loop timing.</p>
+<p>PID feedback supported repeatable movement between the four target locations. Position and velocity information allowed the system to correct tracking error, while friction compensation was applied where applicable. The controls work was therefore directly tied to the mechanical requirement: a lightweight linkage still needed reliable physical positioning.</p>
+<div class="figure-placeholder"><strong>Figures 7.1–7.3</strong><span>Recommended visual block: show the final linkage, geartrain, motor, base, hard stops, sensors, electronics, and LED mechanism together. Call out the lightweight 3D-printed coupler, stability of the large base plate, countersunk hard stops, and steel gears.</span></div>
+
+<div class="section-heading"><p class="eyebrow">07 · Technical documentation</p><h2>Deeper design evidence</h2></div>
+<div class="document-links"><a href="../ME350%20FA25%20FINAL%20REPORT.pdf"><strong>Full ME 350 final report</strong><span>Complete report with figures, calculations, simulation results, and build documentation.</span></a><div class="evidence-note"><strong>Appendices</strong><span>The report is linked above as currently stored in the repository. Appendix-specific links can be added once the appendix titles/files are identified.</span></div></div>
+</article><aside class="case-sidebar"><div class="info-panel"><h3>Verified design results</h3><ul class="highlight-list"><li><strong>4</strong><span>Target LED positions</span></li><li><strong>33.6°</strong><span>Approximate maximum transmission-angle deviation</span></li><li><strong>0.92 W</strong><span>Final simulated maximum power</span></li><li><strong>1.6</strong><span>Final gear transmission ratio</span></li><li><strong>11.9 lb·in</strong><span>Approximate input-link gear-joint torque</span></li></ul></div><div class="info-panel"><h3>Methods</h3><p>SolidWorks · MSC ADAMS · mechanism kinematics · dynamic simulation · torque transfer · Arduino · Hall encoder · PID control</p></div></aside></div></section>
+</main>
+<footer class="site-footer"><div class="container footer-inner"><div><h3>William Peper</h3><p>Mechanical Engineering Student</p></div><div class="footer-contact"><a href="mailto:wbpeper@umich.edu">wbpeper@umich.edu</a><a href="https://linkedin.com/in/williampeper">LinkedIn</a></div></div></footer>
+</body></html>
