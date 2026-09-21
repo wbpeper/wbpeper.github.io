@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Robotic Mobility Platform | William Peper</title>
+  <meta name="description" content="ME 250 engineering case study: first-principles drivetrain and scoop design for a robotic mobility platform." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../style.css" />
+</head>
+<body>
+  <header class="site-header"><div class="container nav"><a class="brand" href="../index.html">William Peper</a><nav><a href="../index.html#projects">Projects</a><a href="../index.html#experience">Experience</a><a href="../index.html#contact">Contact</a></nav></div></header>
+  <main>
+    <section class="case-hero"><div class="container"><p class="eyebrow">ME 250 · Space Race</p><h1>Robotic Mobility Platform</h1><p class="lead">A mechanically designed and manufactured vehicle integrating a planetary-gearbox drivetrain, motorized scoop, collection system, structure, and electromechanical controls.</p><div class="case-actions"><a class="button primary" href="../ME%20250%20Design%20Review%20.pdf">Read the full design review</a><a class="button secondary" href="../index.html#projects">Back to projects</a></div></div></section>
+    <section class="section"><div class="container case-layout"><article>
+      <div class="section-heading"><p class="eyebrow">01 · Requirements</p><h2>From physical requirements to vehicle architecture</h2></div>
+      <p>The project required a mobile robotic platform capable of collecting material with a powered scoop. The final architecture combined a planetary-gearbox-powered drivetrain, a motorized collection mechanism, a structural frame, and integrated electrical controls.</p>
+      <p>The central mechanical challenge was converting vehicle behavior into defensible component requirements before selecting motors or gearboxes. The design process followed:</p>
+      <div class="process-strip"><span>Required behavior</span><b>→</b><span>Forces &amp; resistance</span><b>→</b><span>Wheel torque</span><b>→</b><span>Reduction</span><b>→</b><span>Drivetrain</span></div>
+
+      <div class="section-heading"><p class="eyebrow">02 · Drivetrain analysis</p><h2>First-principles sizing of the drive system</h2></div>
+      <p>Rather than choosing a drivetrain through trial and error, the analysis started with the forces the vehicle needed to overcome. The required wheel torque was derived from the expected resistance and wheel geometry, then compared with available motor torque to determine the reduction required.</p>
+      <div class="equation-card"><strong>Wheel torque requirement</strong><code>τ<sub>wheel</sub> = F<sub>resistance</sub> · r<sub>wheel</sub></code><span>Resistance and wheel radius establish the torque required at the ground interface.</span></div>
+      <div class="equation-card"><strong>Reduction requirement</strong><code>GR ≥ (τ<sub>wheel</sub> · FS) / τ<sub>motor</sub></code><span>The selected ratio includes the 1.75 factor of safety to provide margin for friction, tolerances, loading, and real-world resistance.</span></div>
+      <div class="result-callout"><strong>Calculated drivetrain requirement: approximately 344:1</strong><span>The analysis drove the selection of a high-reduction planetary-gearbox drivetrain rather than treating gearing as an afterthought.</span></div>
+
+      <div class="section-heading"><p class="eyebrow">03 · Scoop analysis</p><h2>Translating scoop load into gearing</h2></div>
+      <p>The scoop was analyzed separately because its load acts through a moment arm. The expected load and scoop geometry were used to calculate the actuation torque, which was then compared with motor capability and increased with the design margin.</p>
+      <div class="equation-card"><strong>Scoop actuation logic</strong><code>τ<sub>scoop</sub> = F<sub>load</sub> · r<sub>moment arm</sub></code><span>Required torque was translated into motor reduction using the available motor torque and the same safety-minded design approach.</span></div>
+      <div class="result-callout"><strong>Calculated scoop gearing requirement: approximately 100:1</strong><span>The ratio connected the expected collection load directly to the final motorized scoop design.</span></div>
+
+      <div class="section-heading"><p class="eyebrow">04 · CAD, manufacturing &amp; assembly</p><h2>Design decisions changed during the physical build</h2></div>
+      <p>CAD was used to package the drivetrain, motor placement, structural members, and collection mechanism as one system. The mechanical layout had to preserve access for assembly while coordinating interfaces between mechanical components and the electrical system.</p>
+      <h3>Scoop attachment: designing for assembly</h3>
+      <p>The initial scoop attachment used two circular mounting holes on each side. During assembly, independently manufactured components had to align at all four mounting points simultaneously, making small positional deviations disproportionately difficult to manage.</p>
+      <p>The arms and scoop were revised to use slots rather than only fixed circular holes. The slots added controlled adjustment during installation, allowing the scoop to be aligned despite normal manufacturing and assembly variation. This was a practical design-for-assembly improvement discovered through the physical build.</p>
+      <p>The scoop was 3D printed, which simplified fabrication of its geometry compared with producing the same shape through conventional machining or fabrication. The manufacturing method supported rapid iteration while the attachment redesign addressed tolerance and alignment directly.</p>
+
+      <div class="section-heading"><p class="eyebrow">05 · Prototype &amp; final system</p><h2>Connecting analysis to the completed vehicle</h2></div>
+      <p>Physical testing of the basket and collection system informed decisions about the scoop geometry and material. The completed platform brought together the calculated drivetrain and scoop requirements, structural design, collection system, and electromechanical integration.</p>
+      <div class="evidence-note"><strong>Technical evidence</strong><span>Figures and detailed derivations are preserved in the <a href="../ME%20250%20Design%20Review%20.pdf">ME 250 Design Review</a>. This page highlights the engineering reasoning so the report can serve as deeper documentation.</span></div>
+    </article><aside class="case-sidebar"><div class="info-panel"><h3>Engineering highlights</h3><ul class="highlight-list"><li><strong>344:1</strong><span>Approximate drivetrain reduction requirement</span></li><li><strong>100:1</strong><span>Approximate scoop gearing requirement</span></li><li><strong>1.75</strong><span>Factor of safety used in torque sizing</span></li><li><strong>3D printed</strong><span>Scoop fabrication approach</span></li></ul></div><div class="info-panel"><h3>Methods</h3><p>First-principles torque analysis · CAD · technical drawings · machining · waterjet · 3D printing · electromechanical integration</p></div></aside></div></section>
+  </main>
+  <footer class="site-footer"><div class="container footer-inner"><div><h3>William Peper</h3><p>Mechanical Engineering Student</p></div><div class="footer-contact"><a href="mailto:wbpeper@umich.edu">wbpeper@umich.edu</a><a href="https://linkedin.com/in/williampeper">LinkedIn</a></div></div></footer>
+</body>
+</html>
